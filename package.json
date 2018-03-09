@@ -1,0 +1,35 @@
+{
+  "name": "product-list",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jamccarty99/Product-List-Refactored.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jamccarty99/Product-List-Refactored/issues"
+  },
+  "homepage": "https://github.com/jamccarty99/Product-List-Refactored#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cookie-session": "^2.0.0-beta.3",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "faker": "^4.1.0",
+    "mongoose": "^5.0.7",
+    "passport": "^0.4.0",
+    "passport-facebook": "^2.1.1",
+    "passport-google-oauth20": "^1.0.0"
+  },
+  "engines": {
+    "node": "8.1.1",
+    "npm": "5.0.3"
+  }
+}
