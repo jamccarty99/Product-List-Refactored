@@ -33,7 +33,8 @@ router.get('/generate-fake-data', (req, res, next) => {
 // We'll want to be able to pass in another optional query to return the products, but sorted by price - either from highest to lowest, or vice versa.
 router.get('/products', (req, res, next) => {
     let numProductsToSkip = 0;
-    let sortByPrice = 'price';
+    let sortByPrice = '';
+    let categoryQuery = '';
 
     if (req.query.page && req.query.page > 0) {
         numProductsToSkip = (req.query.page -1)* 9;
@@ -41,23 +42,22 @@ router.get('/products', (req, res, next) => {
     if (req.query.price == 'highest') {
         sortByPrice = '-price';
     }
-    if (req.query.category) {
-        Product.where("category", req.query.category).
-        limit(9).
-        skip(numProductsToSkip).
-        sort(sortByPrice).
-        exec((error, categoryProducts) => {
-            res.send(categoryProducts)
-        })
-    } else if (!req.query.category) {
-        Product.find({}).
-        limit(9).
-        skip(numProductsToSkip).
-        sort(sortByPrice).
-        exec((error, products) => {
-            res.send(products)
-        })
+    if (req.query.price == 'lowest') {
+        sortByPrice = 'price';
     }
+    if (req.query.category) {
+        categoryQuery ={category: req.query.category};
+    }
+    if (!req.query.category) {
+        categoryQuery = {};
+    }
+    Product.find(categoryQuery).
+    limit(9).
+    skip(numProductsToSkip).
+    sort(sortByPrice).
+    exec((error, products) => {
+        res.send(products)
+    })
 })
 
 // GET /products/:product: Returns a specific product by it's id
